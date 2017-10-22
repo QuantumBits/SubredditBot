@@ -1,2 +1,2 @@
-# DiscordBot
+# PrequelMemeBot
 Prequel-Meme generator
