@@ -1,27 +1,33 @@
 import discord
 import asyncio
 
-client = discord.Client()
+import praw
+import random
+import yaml
 
-@client.event
-async def on_ready():
-        print('Logged in as')
-        print(client.user.name)
-        print(client.user.id)
-        print('------------')
-    
-@client.event
-async def on_message(message):
-    if message.content.startswith('!test'):
-        counter = 0
-        tmp = await client.send_message(message.channel, 'Calculating message...')
-        async for log in client.logs_from(message.channel, limit=100):
-            if log.author == message.author:
-                counter += 1
+with open('.secrets') as f:
+    secret_file = f.read()
+    f.close()
+
+    secrets = yaml.load(secret_file)
+
+    client = discord.Client()
+    reddit = praw.Reddit(client_id=secrets['client_id'], client_secret=secrets['client_secret'], user_agent=secrets['user_agent'])
+
+    @client.event
+    async def on_ready():
+            print('Logged in as')
+            print(client.user.name)
+            print(client.user.id)
+            print('------------')
         
-        await client.edit_message(tmp, 'You have {} messages.'.format(counter))
-    elif message.content.startswith('!sleep'):
-        await asyncio.sleep(5)
-        await client.send_message(message.channel, 'Done sleeping')
+    @client.event
+    async def on_message(message):
+        message_string = message.content
 
-client.run('MzcxNDA3MDQ4MjMzMTg5Mzc3.DM1Low.mkbi5N6uYcs-NH2LvJbfhT6eafw')
+        if 'prequel' in message_string and 'meme' in message_string:
+            hot_memes = reddit.subreddit('prequelmemes').hot()
+            hot_links = [meme.shortlink for meme in hot_memes]
+            await client.send_message(message.channel, random.choice(hot_links))
+
+    client.run(secrets['bot_token'])
