@@ -17,6 +17,10 @@ keywords :
 
 ```
 
+It basically works by scanning everything everyone types, and if they happen to type all the required keywords in a single message, the bot goes to your desired subreddit and picks randomly from the current hot posts. 
+
 Example post:
 
 ![EXECUTE ORDER SEXY SEX](https://i.imgur.com/FXJnPJA.png)
+
+Enjoy!
