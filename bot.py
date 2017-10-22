@@ -26,7 +26,7 @@ with open('.secrets') as f:
 
         if 'prequel' in message_string and 'meme' in message_string:
 
-            hot_memes = reddit.subreddit('prequelmemes').hot()
+            hot_memes = reddit.subreddit(secrets['subreddit']).hot()
             hot_links = [meme.shortlink for meme in hot_memes]
             hot_link_not_good = True
 
@@ -43,19 +43,16 @@ with open('.secrets') as f:
                 except Exception:
                     hot_link_not_good = True
 
+            
+            print(hot_link)
+            print(img_title)
+            print('------------')
 
             em = discord.Embed(title=img_title)
-            em.set_author(name="EXECUTE ORDER PREQUEL MEME")
+            em.set_author(name=secrets['post_title'])
             em.set_image(url=img_link)
             em.url = hot_link
 
             await client.send_message(message.channel, embed=em)
-
-            
-
-    
-
-
-
 
     client.run(secrets['bot_token'])
