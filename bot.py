@@ -1,8 +1,8 @@
-import discord
+import random
 import asyncio
 
+import discord
 import praw
-import random
 import yaml
 
 with open('.secrets') as f:
