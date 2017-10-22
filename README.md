@@ -7,7 +7,7 @@ In order to use this bot, you need a yaml file named ".secrets" in your main dir
 user_agent : <your_reddit_API_username>
 client_id : <your_reddit_account_client_id>
 client_secret : <your_reddit_account_client_secret_key>
-bot_token : <your_bot_token>
+bot_token : <your_Discord_bot_token>
 post_title : <the_title_of_all_your_posts>
 subreddit : <the_name_of_your_subreddit>
 keywords : 
